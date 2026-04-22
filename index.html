@@ -246,6 +246,13 @@ body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-
 /* INFO SECTION */
 .info-notes{font-size:14px;line-height:1.7;color:var(--text);background:var(--lavender-light);border-radius:var(--radius-sm);padding:14px;border-left:3px solid var(--lavender);}
 </style>
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#F48FB1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="apple-touch-icon" href="icon-192.png">
 </head>
 <body>
 
@@ -1504,6 +1511,15 @@ function deleteStitch(id){
 
 /* INIT */
 initAuth();
+
+// Registrar Service Worker
+if('serviceWorker' in navigator){
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('sw.js')
+      .then(function(reg){ console.log('SW registrado:', reg.scope); })
+      .catch(function(err){ console.log('SW error:', err); });
+  });
+}
 
 </script>
 </body>
